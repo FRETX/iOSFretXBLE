@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		77A0B7D91EF86F8D0017E78E /* FretxBLE.h in Headers */ = {isa = PBXBuildFile; fileRef = 77A0B7D71EF86F8D0017E78E /* FretxBLE.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77A0B7E21EF86FA10017E78E /* FretxBLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A0B7DF1EF86FA00017E78E /* FretxBLE.swift */; };
+		77A0B7E31EF86FA10017E78E /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A0B7E01EF86FA00017E78E /* BLEManager.swift */; };
+		77A0B7E41EF86FA10017E78E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A0B7E11EF86FA00017E78E /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		77A0B7D41EF86F8D0017E78E /* FretxBLE.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FretxBLE.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A0B7D71EF86F8D0017E78E /* FretxBLE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FretxBLE.h; sourceTree = "<group>"; };
 		77A0B7D81EF86F8D0017E78E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77A0B7DF1EF86FA00017E78E /* FretxBLE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretxBLE.swift; sourceTree = "<group>"; };
+		77A0B7E01EF86FA00017E78E /* BLEManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
+		77A0B7E11EF86FA00017E78E /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +52,9 @@
 		77A0B7D61EF86F8D0017E78E /* FretxBLE */ = {
 			isa = PBXGroup;
 			children = (
+				77A0B7DF1EF86FA00017E78E /* FretxBLE.swift */,
+				77A0B7E01EF86FA00017E78E /* BLEManager.swift */,
+				77A0B7E11EF86FA00017E78E /* Utilities.swift */,
 				77A0B7D71EF86F8D0017E78E /* FretxBLE.h */,
 				77A0B7D81EF86F8D0017E78E /* Info.plist */,
 			);
@@ -96,6 +105,7 @@
 					77A0B7D31EF86F8D0017E78E = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = SJ64WRFA4V;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +142,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77A0B7E41EF86FA10017E78E /* Utilities.swift in Sources */,
+				77A0B7E21EF86FA10017E78E /* FretxBLE.swift in Sources */,
+				77A0B7E31EF86FA10017E78E /* BLEManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +255,7 @@
 		77A0B7DD1EF86F8D0017E78E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SJ64WRFA4V;
@@ -254,6 +268,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rocks.fretx.FretxBLE;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -261,6 +276,7 @@
 		77A0B7DE1EF86F8D0017E78E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SJ64WRFA4V;
