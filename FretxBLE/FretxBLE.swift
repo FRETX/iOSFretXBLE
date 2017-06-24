@@ -41,6 +41,10 @@ public class FretxBLE: NSObject {
         bleManager.connectToFretX()
     }
     
+    public func clear(){
+        bleManager.sendToFretX(fretCodes: [0])
+    }
+    
     public func connectKeepTrying(){
         
     }
