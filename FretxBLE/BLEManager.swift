@@ -26,7 +26,21 @@ internal class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     internal var isConnected = false
     internal var isScanning = false
     
+    internal var timer:Timer = Timer();
     
+    internal func runTimer(){
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { (timer) -> Void in self.timerFinished() })
+    }
+    
+    internal func timerFinished(){
+        centralManager.stopScan()
+        isConnected = false
+        isScanning = false
+        if let dlg = FretxBLE.sharedInstance.delegate{
+            dlg.didScanTimeout()
+        }
+
+    }
     
     private override init() {
         super.init()
@@ -34,7 +48,20 @@ internal class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     }
     
     internal func connectToFretX(){
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        if(!isScanning){
+            centralManager.scanForPeripherals(withServices: nil, options: nil)
+            isScanning = true
+            runTimer()
+            if let dlg = FretxBLE.sharedInstance.delegate{
+                dlg.didStartScan()
+            }
+        }
+    }
+    
+    internal func disconnectFromFretX(){
+        if let f = fretx {
+            centralManager.cancelPeripheralConnection(f)
+        }
     }
     
     internal func sendToFretX(fretCodes:[UInt8]){
@@ -61,6 +88,8 @@ internal class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     internal func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         fretx?.discoverServices([rxServiceUUID])
         isConnected = true
+        timer.invalidate();
+        isScanning = false
         util.printMessage("Connected to FretX")
         if let dlg = FretxBLE.sharedInstance.delegate{
             dlg.didConnect()
@@ -69,11 +98,13 @@ internal class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     
     internal func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         isConnected = false
+        isScanning = false
         util.printMessage("Disconnected from FretX")
         if let dlg = FretxBLE.sharedInstance.delegate{
             dlg.didDisconnect()
         }
     }
+    
     
     internal func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services!{

@@ -9,13 +9,15 @@
 import Foundation
 import CoreBluetooth
 
-public protocol FretxProtocol{
+@objc public protocol FretxProtocol{
+    func didStartScan()
     func didConnect()
     func didDisconnect()
     func didBLEStateChange(state:CBManagerState)
+    func didScanTimeout()
 }
 
-public class FretxBLE: NSObject {
+@objc public class FretxBLE: NSObject {
     
     public static let sharedInstance = FretxBLE()
     private let bleManager = BLEManager.sharedInstance
@@ -39,6 +41,10 @@ public class FretxBLE: NSObject {
     
     public func connect(){
         bleManager.connectToFretX()
+    }
+    
+    public func disconnect(){
+        bleManager.disconnectFromFretX();
     }
     
     public func clear(){
