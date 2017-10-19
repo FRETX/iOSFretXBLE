@@ -65,9 +65,14 @@ internal class BLEManager: NSObject, CBCentralManagerDelegate, CBPeripheralDeleg
     }
     
     internal func sendToFretX(fretCodes:[UInt8]){
+        guard let txCharacteristic = txCharacteristic else {
+            util.printMessage("Abort sending data to FretX - txCharacteristic was not set")
+            return
+        }
+
         var lightValues:[UInt8] = fretCodes;
         let data = NSData(bytes: &lightValues, length: lightValues.count )
-        fretx?.writeValue(data as Data, for: txCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+        fretx?.writeValue(data as Data, for: txCharacteristic, type: CBCharacteristicWriteType.withoutResponse)
         util.printMessage("Sending data to FretX")
     }
     
